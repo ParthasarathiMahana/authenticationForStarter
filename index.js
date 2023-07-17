@@ -1,10 +1,17 @@
 const express = require("express");
 const app = express();
+const path = require("path");
 
 const PORT = 8000;
 
+app.set("view engine", "ejs");
+app.set("views",path.join(__dirname,"views"));
+
+app.use(express.static("assets"));
+app.use(express.urlencoded());
+
 app.get('/',(req, res)=>{
-    res.send("This is Home Page...");
+    res.render("home");
 })
 
 app.listen(PORT,(err)=>{
