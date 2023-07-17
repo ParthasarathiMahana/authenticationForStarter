@@ -3,14 +3,14 @@ const app = express();
 
 const PORT = 8000;
 
-app.get("/",(re, res)=>{
-    res.send("this is home.");
-});
+app.get('/',(req, res)=>{
+    res.send("This is Home Page...");
+})
 
-app.listen(PORT, (err)=>{
+app.listen(PORT,(err)=>{
     if(err){
-        return console.log("Error while runnig the server on the given port", PORT);
+        return console.log("Error occured while connecting server with port", err);
     }
 
-    console.log("server is up and running on port:", PORT);
+    console.log("Server is up and runnig on port",PORT);
 })
