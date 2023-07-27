@@ -1,6 +1,7 @@
 const db = require('../config/mongoose');
 const Noty = require('noty');
 const  Users = require('../models/user');
+const bcrypt = require('bcryptjs');
 
 module.exports.signup = async(req, res)=>{
     // cecking whether password and confirm password are same or not
@@ -11,7 +12,7 @@ module.exports.signup = async(req, res)=>{
     // checking for same email id in the db
     var userData = await Users.find({email:req.body.email});
     if(userData == false){
-        Users.create({email:req.body.email, password: req.body.password});
+        Users.create({email:req.body.email, password: await bcrypt.hash(req.body.password, 10)});
         console.log("New user added to the database.");
         return res.render("home");
     }
