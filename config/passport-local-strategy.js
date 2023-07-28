@@ -4,11 +4,12 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user');
 
 // authentication using passport and passport local strategy
-passport.use(new LocalStrategy(
-    function(email, password, done) {
-      User.findOne({ email: email }, function (err, user){
-        if (err){
-            return done(err);
+passport.use(new LocalStrategy({usernameField: 'email'},
+    async function(email, password, done) {
+      try{
+        const user = await User.findOne({ email: email });
+        if (!user){
+            return done(null, false);
         }
 
         if (!user || !bcrypt.compare(password, user.password)){
@@ -17,9 +18,12 @@ passport.use(new LocalStrategy(
         }
 
         return done(null, user);
-      });
-    }
-));
+      }
+      catch(err){
+        return done(err, false);
+      }
+    })
+);
 
 // serialization
 passport.serializeUser(function(user, done){
