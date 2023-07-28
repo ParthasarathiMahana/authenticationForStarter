@@ -20,6 +20,8 @@ module.exports.signIn = async(req, res)=>{
 }
 
 module.exports.signOut =(req, res)=>{
-    res.clearCookie('user_id');
-    return res.render('home');
+    // res.clearCookie('user_id');
+    req.logout(function(err) {
+        if (err) { return next(err); }
+    return res.render('home');});
 }

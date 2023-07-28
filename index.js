@@ -2,10 +2,12 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const cookieParser = require('cookie-parser');
+const db = require('./config/mongoose')
 // for passport authentication
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
+const MongoStore = require('connect-mongo')(session);
 
 const flash = require('connect-flash');
 
@@ -26,7 +28,15 @@ app.use(session({
     resave: false,
     cookie:{
         maxAge: (1000*60*100)
-    }
+    },
+    store:new MongoStore({
+            mongooseConnection: db,
+            autoRemove: "disabled"
+        },
+        function(err){
+            console.log(err || 'connect-mongodb setup is done.')
+        }
+    )
 }))
 
 app.use(passport.initialize());
@@ -38,6 +48,5 @@ app.listen(PORT,(err)=>{
     if(err){
         return console.log("Error occured while connecting server with port", err);
     }
-
     console.log("Server is up and runnig on port",PORT);
 })
