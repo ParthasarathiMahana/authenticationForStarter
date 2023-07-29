@@ -3,9 +3,11 @@ const router = express.Router();
 const signinController = require('../controller/signin_controller');
 const passport = require('passport');
 
-router.use('/', passport.authenticate('local',{
+router.post('/', passport.authenticate('local',{
     failureRedirect:'/'
 }),signinController.signIn);
-router.use('/logout', signinController.signOut)
+
+router.get('/auth/google', passport.authenticate('google', {scope:['profile', 'email']}));
+router.get('/auth/google/callback', passport.authenticate('google', {failureRedirect: '/'}), signinController.signIn);
 
 module.exports = router;

@@ -44,10 +44,18 @@ passport.deserializeUser(async function(id, done){
     return done(null, false);
 })
 
-// passport.setAuthenticatedUser = (req, res, next)=>{
-//   if(req.isAuthenticated()){
-//     res.locals.user = req.user;
-//   }
-// }
+passport.checkAuthentication = function(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  }
+  return res.render('/');
+}
+
+passport.setAuthenticatedUser = (req, res, next)=>{
+  if(req.isAuthenticated()){
+    res.locals.user = req.user;
+  }
+  next();
+}
 
 module.exports = passport;

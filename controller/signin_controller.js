@@ -3,8 +3,9 @@ const Users = require('../models/user');
 const bcrypt = require('bcryptjs');
 
 module.exports.signIn = async(req, res)=>{
-    const user = await Users.find({email:req.body.email});
-    return res.render("homeAfterLogin",{user_email:user[0].email});
+    if(req.isAuthenticated()){
+        return res.render("homeAfterLogin");
+    }
 }
 
 module.exports.signOut =(req, res)=>{

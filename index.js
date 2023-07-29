@@ -3,6 +3,7 @@ const app = express();
 const path = require("path");
 const cookieParser = require('cookie-parser');
 const db = require('./config/mongoose')
+const passportGoogle = require('./config/passport-google-oauth2-strategy');
 // for passport authentication
 const session = require('express-session');
 const passport = require('passport');
@@ -41,6 +42,7 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(passport.setAuthenticatedUser);
 
 app.use('/', require('./routes'));
 
