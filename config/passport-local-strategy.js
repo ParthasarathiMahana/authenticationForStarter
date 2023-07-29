@@ -12,12 +12,17 @@ passport.use(new LocalStrategy({usernameField: 'email'},
             return done(null, false);
         }
 
-        if (!user || !bcrypt.compare(password, user.password)){
+        if (!user || !await bcrypt.compare(password, user.password)){
             console.log("invalid email or password");
             return done(null, false);
         }
 
-        return done(null, user);
+        if(await bcrypt.compare(password, user.password)){
+          return done(null, user);
+        }
+
+        return done(null, false);
+
       }
       catch(err){
         return done(err, false);
@@ -38,5 +43,11 @@ passport.deserializeUser(async function(id, done){
     }
     return done(null, false);
 })
+
+// passport.setAuthenticatedUser = (req, res, next)=>{
+//   if(req.isAuthenticated()){
+//     res.locals.user = req.user;
+//   }
+// }
 
 module.exports = passport;

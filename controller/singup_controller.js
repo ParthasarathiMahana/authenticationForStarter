@@ -2,10 +2,12 @@ const db = require('../config/mongoose');
 const Noty = require('noty');
 const  Users = require('../models/user');
 const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 
 module.exports.signup = async(req, res)=>{
     // cecking whether password and confirm password are same or not
     if(req.body.password !== req.body.confirm_password){
+        console.log("password does not match.");
         return res.render("home");
     }
 

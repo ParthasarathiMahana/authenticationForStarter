@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/homeAfterLogin.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <title>Home</title>
 </head>
@@ -13,8 +14,10 @@
             <nav class="navbar bg-body-tertiary">
                 <div class="container-fluid">
                   <a class="navbar-brand">Home</a>
-                  <form class="d-flex" role="search" style="margin-left: 58rem;" action="" method="">
-                    <button class="btn btn-outline-success" type="submit" style="margin-right: 1rem;">Reset Password</button>
+                  <form  role="search" style="margin-left: 58rem;" class="d-flex">
+                    <a href="" >
+                      <button class="btn btn-outline-success reset_btn" type="submit" style="margin-right: 1rem;">Reset Password</button>
+                    </a>
                   </form>
                   <form class="d-flex" role="search" style="margin-right: 5rem;" action="/logout" method="get">
                     <button class="btn btn-outline-danger" type="submit">Log out</button>
@@ -28,10 +31,15 @@
         </div>
 
         <div class="reset_password_form_container">
-
+          <form action="/resetpassword" method="post">
+            <input type="text" name="new_password" placeholder="New password">
+            <input type="text" name="confirm_password" placeholder="confirm password">
+            <input type="submit" value="submit">
+          </form>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="/js/homeAfterLogin.js"></script>
 </body>
 </html>
