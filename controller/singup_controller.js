@@ -6,8 +6,9 @@ const crypto = require('crypto');
 module.exports.signup = async(req, res)=>{
     // cecking whether password and confirm password are same or not
     if(req.body.password !== req.body.confirm_password){
+        req.flash("error", "password does not match.")
         console.log("password does not match.");
-        return res.render("home");
+        return res.redirect("/");
     }
 
     // checking for same email id in the db
