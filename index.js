@@ -12,6 +12,8 @@ const MongoStore = require('connect-mongo')(session);
 // for flash messages
 const flash = require('connect-flash');
 const customMWare = require('./config/middleware');
+// for deployment
+require('dotenv').config();
 
 const PORT = 8000;
 app.use(express.urlencoded());
