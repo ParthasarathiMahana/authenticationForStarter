@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+require('dotenv').config();
+
 const cookieParser = require('cookie-parser');
 const db = require('./config/mongoose')
 const passportGoogle = require('./config/passport-google-oauth2-strategy');
@@ -13,7 +15,6 @@ const MongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 const customMWare = require('./config/middleware');
 // for deployment
-require('dotenv').config();
 
 const PORT = 8000;
 app.use(express.urlencoded());
