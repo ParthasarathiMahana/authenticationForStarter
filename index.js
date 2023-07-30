@@ -16,7 +16,7 @@ const flash = require('connect-flash');
 const customMWare = require('./config/middleware');
 // for deployment
 
-const PORT = 8000;
+const PORT = process.env.PORT||8000;
 app.use(express.urlencoded());
 
 app.use(cookieParser());
