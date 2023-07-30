@@ -11,16 +11,12 @@ module.exports.createSession = (req, res)=>{
 }
 
 module.exports.signOut =(req, res)=>{
-    // req.flash('success', "Logged out successfully.");
     req.logout(req.user, (err)=>{
         if(err){
             console.log("error signing out");
             return;
         }
-        // return res.redirect('/');
     })
-
-    // req.logout();
     req.flash('success', "Logged out successfully.");
     return res.redirect('/');
 }
