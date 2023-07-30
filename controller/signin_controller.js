@@ -1,17 +1,28 @@
 const User = require('../models/user');
-const Users = require('../models/user');
 const bcrypt = require('bcryptjs');
 
 module.exports.signIn = async(req, res)=>{
-    if(req.isAuthenticated()){
-        return res.render("homeAfterLogin");
-    }
+    return res.render("homeAfterLogin");
+}
+
+module.exports.createSession = (req, res)=>{
+    req.flash('success', "Logged in successfully.");
+    return res.redirect('/login/profile');
 }
 
 module.exports.signOut =(req, res)=>{
-    req.logout(function(err) {
-        if (err) { return next(err); }
-    return res.render('home');});
+    // req.flash('success', "Logged out successfully.");
+    req.logout(req.user, (err)=>{
+        if(err){
+            console.log("error signing out");
+            return;
+        }
+        // return res.redirect('/');
+    })
+
+    // req.logout();
+    req.flash('success', "Logged out successfully.");
+    return res.redirect('/');
 }
 
 module.exports.resetPassword = async(req, res)=>{

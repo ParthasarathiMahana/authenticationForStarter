@@ -1,5 +1,4 @@
 const db = require('../config/mongoose');
-const Noty = require('noty');
 const  Users = require('../models/user');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');

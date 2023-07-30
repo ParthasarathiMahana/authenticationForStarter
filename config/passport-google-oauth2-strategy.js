@@ -13,7 +13,7 @@ passport.use(new googleStrategy({
     async function(accessToken, refreshToken, profile, done){
         let user = await User.findOne({email: profile.emails[0].value});
         if(user){
-            console.log(profile);
+            // console.log(profile);
             return done(null, user);
         }else{
             let psTemp = crypto.randomBytes(20).toString('hex');
