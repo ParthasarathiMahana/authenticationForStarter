@@ -53,9 +53,11 @@ app.use(customMWare.setFlash);
 
 app.use('/', require('./routes'));
 
-app.listen(PORT,(err)=>{
-    if(err){
-        return console.log("Error occured while connecting server with port", err);
-    }
-    console.log("Server is up and runnig on port",PORT);
+db.then(()=>{
+    app.listen(PORT,(err)=>{
+        if(err){
+            return console.log("Error occured while connecting server with port", err);
+        }
+        console.log("Server is up and runnig on port",PORT);
+    })
 })
